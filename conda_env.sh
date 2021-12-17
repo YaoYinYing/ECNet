@@ -17,7 +17,7 @@ echo "export PYTHONPATH=$PYTHONPATH" >>~/.bashrc
 
 cho "channels:
   - defaults
-  - https://levinthal:paradox@conda.graylab.jhu.edu
+  - https://*****:******@conda.graylab.jhu.edu
   - conda-forge
 show_channel_urls: true
 default_channels:
@@ -37,8 +37,10 @@ pkgs_dirs:
 
 
 conda clean -i
-conda install -y -c pytorch  cudatoolkit=11.4
+conda install -y -c pytorch cudnn==8.2.0.53
+conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
 conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign2==2.04
+
 
 
 # CCMPred
@@ -47,9 +49,12 @@ git clone --recursive https://github.com/soedinglab/CCMpred.git
 cd CCMPred
 
 # CCMpred use cuda.
-export PATH=/usr/local/cuda-11.5/bin:$PATH
+
+cudabin_path=/usr/local/cuda-11.4/bin/
+
+export PATH=$cudabin_path:$PATH
 cmake .
 make
 # append CCMpred bin path to PATH
 cd bin
-echo export PATH=/usr/local/cuda-11.5/bin:"$PWD":'$PATH' >> ~/.bashrc
+echo export PATH="$cudabin_path":"$PWD":'$PATH' >> ~/.bashrc
