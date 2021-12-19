@@ -41,20 +41,22 @@ conda install -y -c pytorch cudnn==8.2.0.53
 conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
 conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign2==2.04
 
-
+# fix -b option missing for ccmpred
+apt-get install libmsgpack-dev libjansson-dev
 
 # CCMPred
-cd
+cd /software
 git clone --recursive https://github.com/soedinglab/CCMpred.git
 cd CCMPred
+
+cmake .
+make -j20
+
 
 # CCMpred use cuda.
 
 cudabin_path=/usr/local/cuda-11.4/bin/
 
-export PATH=$cudabin_path:$PATH
-cmake .
-make
 # append CCMpred bin path to PATH
 cd bin
-echo export PATH="$cudabin_path":"$PWD":'$PATH' >> ~/.bashrc
+echo export PATH="$cudabin_path":"$PWD":'$PATH' >> /mnt/data/envs/.jpasrc

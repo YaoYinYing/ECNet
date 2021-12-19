@@ -44,4 +44,7 @@ for v in variants:
 
 df.drop(columns=[variant_col], inplace=True)
 
+# rename column of fitness data
+df.rename(index=str,columns={variant_col:'score'},inplace=True)
+
 df.to_csv(out_tsv, sep='\t',index=False)

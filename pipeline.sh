@@ -22,7 +22,7 @@ python ${path_to_CCMpred%/bin/ccmpred}/scripts/convert_alignment.py $prefix\_ecn
 
 # run ccmpred for local contacts prediction
 # edited by Yinying according to the ccmpred help message.
-ccmpred $prefix\_ecnet.psc $prefix\_ecnet.mat -r $prefix\_ecnet.braw
+ccmpred $prefix\_ecnet.psc $prefix\_ecnet.mat -b $prefix\_ecnet.braw
 
 # extract variant and related fitness as a tsv table
 python ../tools/transform_fitness_data_to_tsv.py ./data/P450_experi_data_encoded.csv 'variants' '11H-Cuol' -
